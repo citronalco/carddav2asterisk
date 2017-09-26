@@ -17,7 +17,7 @@ permit = 127.0.0.1/255.255.255.0
 read = system
 write = system
 ```
-1. Open the script in an editor and edit the user's credentials and host and port of Asterisk's Manager interface:
+2. Open the script in an editor and edit the user's credentials and host and port of Asterisk's Manager interface:
 ```
 # ASTERISK MANAGER CONNECTION
 HOST = 'localhost'
@@ -25,13 +25,13 @@ PORT = 5038
 USER = 'carddavimport'
 PASS = 'cidpwd'
 ```
-1. Change NATIONALPREFIX and DOMESTICPREFIX to match your location:
+3. Change NATIONALPREFIX and DOMESTICPREFIX to match your location:
 ```
 # PERSONAL SETTINGS
 NATIONALPREFIX = "0049"
 DOMESTICPREFIX = "0841"
 ```
-1. If you haven't configured CID lookup in Asterisk yet, you may want to add something like this somewhere at the beginning of your dialplan in extensions.conf: ``exten => <yourExtension>,n,Set(CALLERID(name)=${IF(${DB_EXISTS(cidname/${CALLERID(num)})}?${DB(cidname/${CALLERID(num)})}:${CALLERID(name)})})``
+4. If you haven't configured CID lookup in Asterisk yet, you may want to add something like this somewhere at the beginning of your dialplan in extensions.conf: ``exten => <yourExtension>,n,Set(CALLERID(name)=${IF(${DB_EXISTS(cidname/${CALLERID(num)})}?${DB(cidname/${CALLERID(num)})}:${CALLERID(name)})})``
 
 #### How to run the script
 ``./carddav2asterisk.py <URl to CardDAV addressbook> <username> <password>``
