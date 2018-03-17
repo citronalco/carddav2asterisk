@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 import requests
 import vobject
 import re
