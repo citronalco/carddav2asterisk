@@ -4,10 +4,14 @@ This script reads all contacts from a CardDAV addressbook and puts them into Ast
 That way Asterisk can show a caller's name instead of just the number.
 
 If there's already an entry in Asterisk's caller database for a specific number, this script updates the number with the new name.
-So far I have only tested with OwnCloud 9.
+So far I have only tested with OwnCloud 9 and Nextcloud 13.
+
+### Requirements
+* Python 2
+* Additional Python 2 modules: requests, vobjects, pyst, lxml
+(Debian packages: python-requests, python-vobject, python-pyst, python-lxml)
 
 ### Usage
-
 #### Configuration
 1. This script uses Asterisk Manager to access the caller id database, so you need to set up an user with "system" permissions if you have not already done so. To add an user create the file "/etc/asterisk/manager.d/carddav2asterisk.conf":
 ```
