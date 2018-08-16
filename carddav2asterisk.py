@@ -1,12 +1,10 @@
 #!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
 import requests
 import vobject
 import re
-import time
 from asterisk import manager
 from requests.auth import HTTPBasicAuth
 from lxml import etree
@@ -54,7 +52,6 @@ def main(argv):
     ami.login(USER,PASS)
 
     # get phone numbers from vcard
-    starttime=int(time.time());
     for vurl in getAllVcardLinks(url,auth):
 	r = requests.request("GET",vurl,auth=auth)
 	vcard = vobject.readOne(r.content)
@@ -63,14 +60,14 @@ def main(argv):
 		num = tidyPhoneNumber(telno.value)
 		if "fn" in vcard.contents:
 		    name = vcard.fn.value
-		    print "Adding/updating Number: "+num+" Name: "+name
+		    print("Adding/updating Number: "+num+" Name: "+name)
 		    ami.send_action({"Action": "DBPut", "Family": "cidname", "Key": num, "Val": name})
     ami.logoff()
     ami.close()
 
 if __name__ == "__main__":
     if len(sys.argv)!=4:
-	print "Must be called with eight arguments: <carddav-url> <carddav-user> <carddav-password>"
-	print "Example: %s https://owncloud.example.com/remote.php/dav/addressbooks/users/russmeyer/contacts/ meyerr p8a55w0rd" % sys.argv[0]
+	print("Must be called with eight arguments: <carddav-url> <carddav-user> <carddav-password>")
+	print("Example: %s https://owncloud.example.com/remote.php/dav/addressbooks/users/russmeyer/contacts/ meyerr p8a55w0rd" % sys.argv[0])
 	sys.exit(1)
     sys.exit(main(sys.argv))
