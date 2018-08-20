@@ -9,7 +9,7 @@ So far I have only tested with OwnCloud 9 and Nextcloud 13.
 ### Requirements
 * Python 2
 * Additional Python 2 modules: requests, vobjects, pyst, lxml
-(Debian packages: python-requests, python-vobject, python-pyst, python-lxml)
+  (Debian packages: python-requests, python-vobject, python-pyst, python-lxml)
 
 ### Usage
 #### Configuration
@@ -35,10 +35,11 @@ PASS = 'cidpwd'
 NATIONALPREFIX = "0049"
 DOMESTICPREFIX = "0841"
 ```
-4. If you haven't configured CID lookup in Asterisk yet, you may want to add something like this somewhere at the beginning of your dialplan in extensions.conf: ``exten => <yourExtension>,n,Set(CALLERID(name)=${IF(${DB_EXISTS(cidname/${CALLERID(num)})}?${DB(cidname/${CALLERID(num)})}:${CALLERID(name)})})``
+4. If you haven't configured CID lookup in Asterisk yet, you may want to add something like this somewhere at the beginning of your dialplan in extensions.conf:
+``exten => <yourExtension>,n,Set(CALLERID(name)=${IF(${DB_EXISTS(cidname/${CALLERID(num)})}?${DB(cidname/${CALLERID(num)})}:${CALLERID(name)})})``
 
 #### How to run the script
-``./carddav2asterisk.py <URl to CardDAV addressbook> <username> <password>``
+``./carddav2asterisk.py <URl to CardDAV addressbook> <CardDAV username> <CardDAV password>``
 
 Example:
-``./carddav2asterisk.py https://owncloud.example.com/remote.php/dav/addressbooks/users/russmeyer/contacts/ meyerr p8a55w0rd``
+``./carddav2asterisk.py https://owncloud.example.com/remote.php/dav/addressbooks/users/russmeyer/contacts/ meyerr pa55w0rd``
