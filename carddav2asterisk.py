@@ -67,7 +67,7 @@ def main(argv):
 
 if __name__ == "__main__":
     if len(sys.argv)!=4:
-	print("Must be called with eight arguments: <carddav-url> <carddav-user> <carddav-password>")
+	print("Must be called with three arguments: <carddav-url> <carddav-user> <carddav-password>")
 	print("Example: %s https://owncloud.example.com/remote.php/dav/addressbooks/users/russmeyer/contacts/ meyerr p8a55w0rd" % sys.argv[0])
 	sys.exit(1)
     sys.exit(main(sys.argv))
