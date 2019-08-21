@@ -8,8 +8,8 @@ verify_ssl = true
 [packages]
 vobject = "*"
 requests = "*"
-pyst3 = {editable = true,git = "https://github.com/tbhi/pyst3.git"}
 lxml = "*"
+pyst2 = "*"
 
 [requires]
 python_version = "3.7"

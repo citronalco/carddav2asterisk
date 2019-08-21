@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "009d18dd0bae731e45d51d4f0931e8290eaf882a033a6634199557e89e522a3f"
+            "sha256": "caa7fb28fde051cd843559fb88db6400b71abb6a5702f89f4d17687fdb7baa09"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -65,10 +65,13 @@
             "index": "pypi",
             "version": "==4.4.1"
         },
-        "pyst3": {
-            "editable": true,
-            "git": "https://github.com/tbhi/pyst3.git",
-            "ref": "eae402c158e9101895cc8b8af6ccb7ec76b70eac"
+        "pyst2": {
+            "hashes": [
+                "sha256:07e8f4154b18fc2d11c2873a426100685fc4483da9b29db2b5f937cacf1b81cf",
+                "sha256:7197a6ddd99c4d6783fe8bb8964b4048bfe496a83cf8a47e26ca233fcc61c182"
+            ],
+            "index": "pypi",
+            "version": "==0.5.1"
         },
         "python-dateutil": {
             "hashes": [
