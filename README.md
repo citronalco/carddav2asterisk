@@ -1,5 +1,8 @@
 # CardDAV-to-Asterisk import
 
+**Note: tbhi has updated this script, including Python 3 support: https://github.com/tbhi/carddav2asterisk - I haven't tried it yet, though.**
+
+
 This script reads all contacts from a CardDAV addressbook and puts them into Asterisk's internal caller id database.
 That way Asterisk can show a caller's name instead of just the number.
 
