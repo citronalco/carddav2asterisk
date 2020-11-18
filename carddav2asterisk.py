@@ -76,7 +76,7 @@ def putCids(lp, args, config):
     if "tel" in vcard.contents:
       for telno in vcard.contents['tel']:
         num = tidyPhoneNumber(config, telno.value)
-        if "fn" in vcard.contents:
+        if num and "fn" in vcard.contents:
           name = vcard.fn.value
           print("Adding/updating Number: %s Name: %s" % (num, name), end="... ")
           if not args.no_update:
