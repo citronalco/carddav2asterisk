@@ -16,20 +16,16 @@ import configparser
 
 # get list with links to all available vcards
 def getAllVcardLinks(url, auth):
-  baseurl = urlparse(url).scheme+'://' + urlparse(url).netloc
+  baseurl = urlparse(url).scheme + '://' + urlparse(url).netloc
 
-  r = requests.request('PROPFIND', url, auth = auth)
+  r = requests.request('PROPFIND', url, auth = auth, headers={'content-type': 'text/xml', 'Depth': '1'})
   if r.status_code != 207:
     raise RuntimeError('error in response from %s: %r' % (url, r))
 
-  root = etree.XML(r.text)
   vcardUrlList = []
-  for record in root.xpath(".//d:response", namespaces = {"d" : "DAV:"}):
-    type = record.xpath(".//d:getcontenttype", namespaces = {"d" : "DAV:"})
-    if (type) and type[0].text.startswith("text/vcard"):
-      vcardlinks = record.xpath(".//d:href", namespaces = {"d" : "DAV:"})
-      for link in vcardlinks:
-        vcardUrlList.append(baseurl + link.text)
+  root = etree.XML(r.text.encode())
+  for link in root.xpath('./d:response/d:propstat/d:prop/d:getcontenttype[starts-with(.,"text/vcard")]/../../../d:href', namespaces = {"d": "DAV:"}):
+    vcardUrlList.append(baseurl + link.text)
   return vcardUrlList
 
 

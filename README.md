@@ -5,7 +5,7 @@ That way Asterisk can show a caller's name instead of just the number.
 
 If there's already an entry in Asterisk's caller database for a specific number, this script updates the number with the new name.
 
-So far I have run this script successfully with OwnCloud 9 to Nextcloud 19.
+So far I have run this script successfully with OwnCloud 9 to Nextcloud 21 and DAViCal 1.1.10.
 
 ### Requirements
 * Python 3
