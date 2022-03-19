@@ -68,7 +68,11 @@ def putCids(lp, args, config):
   # get phone numbers from vcard
   for vurl in getAllVcardLinks(url, auth):
     r = requests.request("GET", vurl, auth=auth)
-    vcard = vobject.readOne(r.text)
+    try:
+      vcard = vobject.readOne(r.text)
+    except ParseError as e:
+      print(e)
+      continue
     if "tel" in vcard.contents:
       for telno in vcard.contents['tel']:
         num = tidyPhoneNumber(config, telno.value)
