@@ -54,7 +54,7 @@ To add such an user, create a file `/etc/asterisk/manager.d/carddav2asterisk.con
    If in doubt simply omit the **[phone]** section.
 
 
-3. If you haven't configured CID lookup in Asterisk yet, you may want to add something like this somewhere at the beginning of your dialplan in `extensions.conf`:
+3. If you haven't configured CID lookup (means: "Caller ID lookup", so that your phone shows the callers' names instead of their phone numbers) in Asterisk yet, you may want to add something like this somewhere at the beginning of your dialplan in `extensions.conf`:
 ``exten => <yourExtension>,n,Set(CALLERID(name)=${IF(${DB_EXISTS(cidname/${CALLERID(num)})}?${DB(cidname/${CALLERID(num)})}:${CALLERID(name)})})``
 
 
