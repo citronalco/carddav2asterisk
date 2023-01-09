@@ -6,6 +6,7 @@ import requests
 import vobject
 import re
 import asyncio
+import time
 from panoramisk import Manager
 from requests.auth import HTTPBasicAuth
 from lxml import etree
@@ -44,6 +45,7 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('ini_file')
   parser.add_argument("--no-update", help="Don't write to asterisk", action='store_true', default=False)
+  parser.add_argument("--sleep", help="Sleep SLEEP seconds between carddav calls", action='store', type=float, default=0)
   args = parser.parse_args()
 
   config = configparser.RawConfigParser()
@@ -70,6 +72,7 @@ def putCids(lp, args, config):
     r = requests.request("GET", vurl, auth=auth)
     try:
       vcard = vobject.readOne(r.text)
+      time.sleep(args.sleep)
     except ParseError as e:
       print(e)
       continue
