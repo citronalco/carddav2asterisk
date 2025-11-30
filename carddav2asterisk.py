@@ -51,12 +51,10 @@ def main():
   config = configparser.RawConfigParser()
   config.read(args.ini_file)
 
-  loop = asyncio.get_event_loop()
-  loop.run_until_complete(putCids(loop, args, config))
-  loop.close()
+  asyncio.run(putCids(args, config))
 
 
-def putCids(lp, args, config):
+async def putCids(args, config):
   auth = HTTPBasicAuth(config['carddav']['user'], config['carddav']['pass'])
   url = config['carddav']['url']
 
@@ -65,7 +63,7 @@ def putCids(lp, args, config):
                   port = config['ami']['port'],
                   username = config['ami']['user'],
                   secret = config['ami']['pass'])
-  yield from ami.connect()
+  await ami.connect()
 
   # get phone numbers from vcard
   for vurl in getAllVcardLinks(url, auth):
@@ -76,6 +74,7 @@ def putCids(lp, args, config):
     except ParseError as e:
       print(e)
       continue
+
     if "tel" in vcard.contents:
       for telno in vcard.contents['tel']:
         num = tidyPhoneNumber(config, telno.value)
@@ -83,11 +82,12 @@ def putCids(lp, args, config):
           name = vcard.fn.value
           print("Adding/updating Number: %s Name: %s" % (num, name), end="... ")
           if not args.no_update:
-            ami_result = yield from ami.send_action({"Action": "DBPut", "Family": "cidname", "Key": num, "Val": name})
+            ami_result = await ami.send_action({"Action": "DBPut", "Family": "cidname", "Key": num, "Val": name})
             print(ami_result.Response)
           else:
             print("no-update")
   ami.close()
+
 
 if __name__ == "__main__":
   main()
