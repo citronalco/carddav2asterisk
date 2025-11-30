@@ -31,8 +31,8 @@ def getAllVcardLinks(url, auth):
 
 
 def tidyPhoneNumber(config, num):
-  num = re.sub("^\+", "00", num)    # +39 -> 0039
-  num = re.sub("\D", "", num)       # remove all non-digits
+  num = re.sub(r"^\+", "00", num)    # +39 -> 0039
+  num = re.sub(r"\D", "", num)       # remove all non-digits
   if 'phone' in config:
     if 'nationalprefix' in config['phone']:
       num = re.sub("^" + config['phone']['nationalprefix'] + "0*", "0", num)    # strip own national prefix
